@@ -1,0 +1,67 @@
+/* Shared workspace geometry. Reference desktop viewport: 1287 × 1204. */
+:root {
+  --workspace-gutter: clamp(20px, 2.5vw, 40px);
+  --workspace-gap: 20px;
+}
+.dashboard-main { width: 100%; max-width: none; grid-template-columns: 228px minmax(0, 1fr); }
+.dashboard-header { padding-inline: var(--workspace-gutter); }
+.dashboard-content { padding: 32px var(--workspace-gutter) 48px; }
+.dashboard-content > *,
+.dashboard-content :is(.stats, .dash-course-grid, .class-list, .resource-browser, .resource-list, .forum-layout, .report-filters, .report-metrics, .form-row) > * { min-width: 0; }
+.dashboard-title { align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+.dashboard-title > div { flex: 1 1 360px; min-width: 0; }
+.dashboard-title h1 { overflow-wrap: anywhere; }
+.dashboard-actions { flex-wrap: wrap; gap: 8px; }
+.dashboard-title :is(.hero-login, .outline-green) { margin-top: 0; }
+.dashboard-section-head, .resource-actions,
+.ops-heading, .ops-summary, .schedule-heading, .schedule-toolbar,
+.schedule-toolbar > div, .schedule-actions, .forum-heading,
+.student-report-heading { flex-wrap: wrap; gap: 12px; }
+.dashboard-content :is(.operations, .schedule-page, .forum-page, .student-report) {
+  width: 100%; max-width: none; margin: 24px 0 0;
+}
+.dashboard-content :is(.dash-course-grid, .class-list) {
+  grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--workspace-gap);
+}
+.dashboard-content :is(.dash-course, .class-card, .quiz-card, .ops-panel, .schedule-event-main, .forum-thread) {
+  min-width: 0; overflow-wrap: anywhere;
+}
+.dashboard-content :is(input, select, textarea) { min-width: 0; max-width: 100%; }
+.dashboard-content :is(.ops-table-scroll, .student-components-table) { min-width: 0; max-width: 100%; overflow-x: auto; }
+.ops-tabs { min-width: 0; max-width: 100%; overflow-x: auto; }
+.resource-browser { grid-template-columns: 190px minmax(0, 1fr); }
+.resource-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.forum-layout { grid-template-columns: minmax(240px, .8fr) minmax(0, 1.5fr); }
+.forum-heading label { min-width: 0; width: min(100%, 320px); }
+.forum-heading select { width: 100%; min-width: 0; }
+.modal-backdrop { overflow-y: auto; }
+.modal-backdrop > .login-modal { max-height: calc(100dvh - 40px); overflow-y: auto; }
+.modal-backdrop > .login-modal.quiz-form { max-height: 100dvh; }
+
+@media (min-width: 901px) and (max-width: 1350px) {
+  .dashboard-content :is(.dash-course-grid, .class-list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashboard-actions { flex-basis: 100%; }
+  .resource-head { align-items: flex-start; }
+  .resource-actions { width: 100%; }
+  .resource-search { flex: 1; }
+  .essay-builder-body { grid-template-columns: 290px minmax(0, 1fr); }
+  .essay-settings { padding: 24px 20px; }
+}
+@media (max-width: 900px) {
+  .dashboard-main { display: flex; }
+  .dashboard-content { width: 100%; padding: 24px var(--workspace-gutter) 40px; }
+  .dashboard-content :is(.dash-course-grid, .class-list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .resource-list { grid-template-columns: 1fr; }
+  .forum-layout { grid-template-columns: 1fr; }
+  .forum-sidebar { max-height: 360px; }
+}
+@media (max-width: 700px) {
+  .resource-browser { display: block; }
+  .dashboard-title > div { flex-basis: 100%; }
+  .dashboard-actions { width: 100%; }
+}
+@media (max-width: 560px) {
+  :root { --workspace-gutter: 16px; --workspace-gap: 16px; }
+  .dashboard-content :is(.dash-course-grid, .class-list) { grid-template-columns: minmax(0, 1fr); }
+  .account span { max-width: 130px; overflow-wrap: anywhere; }
+}

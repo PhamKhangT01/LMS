@@ -1,0 +1,30 @@
+{
+  "schema": "lms_test_63560177074e",
+  "checks": [
+    "first-login gate, password rotation and old-token revocation",
+    "draft lessons can be corrected and stale edits are rejected",
+    "course draft, review guard, approval and protected lesson API",
+    "semester offering, idempotent roster sync, activation and lesson progress",
+    "repeat enrollment in a second semester preserves independent offering",
+    "outside-class access denied for lessons and grades",
+    "returned quiz drafts can be revised, stale revisions fail, unused drafts can be removed",
+    "quiz review blocks unpublished assessment",
+    "concurrent starts share one attempt, drafts recover, stale save rejected and duplicate submit is idempotent",
+    "essay grading bounds, grade approval, hidden results and frozen published scores",
+    "independent appeal reviewer, proposal does not alter official grade, approval applies audited correction",
+    "appeal window blocks closure, archive is read-only, full history export",
+    "withdrawal preserves earlier attempts",
+    "late payload rejected, server worker submits saved draft without browser, attempt limit enforced",
+    "unique temporary credentials, forced activation, account lock and password reset",
+    "staff-only assessment preview and independent content revision",
+    "approved individual allowance adds one attempt and rejects lecturer approval",
+    "in-app due reminders, per-user read state and duplicate prevention",
+    "XLSX preview is read-only, duplicate and role-conflict rows rejected, credentials unique",
+    "DOCX multiple-choice import retains separate manual-essay workflow",
+    "academic reporting enforces staff scope, official published results and stage filters",
+    "support indicators respect enrollment age and individual extensions; CSV escapes formulas and exports all matching rows"
+  ],
+  "passed": 22,
+  "log": "/private/tmp/lms-integration-api.log",
+  "unitTestsPassed": 30
+}

@@ -1,0 +1,9 @@
+{
+  "name": "law-lms-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": { "dev": "vite", "build": "tsc -b && vite build", "preview": "vite preview" },
+  "dependencies": { "@vitejs/plugin-react": "latest", "vite": "latest", "typescript": "~5.9.3", "react": "latest", "react-dom": "latest", "lucide-react": "latest" },
+  "devDependencies": { "@types/react": "latest", "@types/react-dom": "latest" }
+}

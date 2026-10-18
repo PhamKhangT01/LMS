@@ -1,0 +1,15 @@
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+backend/bin/
+backend/obj/
+**/bin/
+**/obj/
+TestResults/
+backend/appsettings.Local.json
+backend/.env
+backend/uploads/
+.env
+
+.backups/
+__pycache__/

@@ -1,0 +1,73 @@
+.landing-page :is(#about, #library, #help) { scroll-margin-top: 24px; }
+.landing-information { color: var(--landing-ink); }
+.landing-information :is(h2,h3,p) { margin-top: 0; }
+.landing-information h2 { font: 700 clamp(28px,2.7vw,48px)/1.25 'Be Vietnam Pro',sans-serif; letter-spacing: -1.1px; margin-bottom: 20px; }
+.landing-information p { font-size: clamp(15px,.95vw,19px); line-height: 1.8; }
+.landing-information :is(.library-introduction,.landing-help,.landing-final-cta) {
+  width: var(--landing-content-width); margin-inline: auto;
+}
+.library-introduction { padding-block: clamp(48px,4.5vw,104px); display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(40px,6vw,96px); align-items: start; }
+.library-copy { padding-top: 20px; }
+.library-copy > p { max-width: 42ch; color: #385344; margin-bottom: 24px; }
+.landing-text-action { display: inline-flex; align-items: center; gap: 14px; padding: 0; border: 0; background: transparent; color: #205c3b; font-family: inherit; font-size: 15px; font-weight: 700; line-height: 1.7; cursor: pointer; }
+.library-copy .library-access-note { font-size: 13px; line-height: 1.7; margin: 16px 0 0; max-width: 300px; }
+.library-types { list-style: none; padding: 0; margin: 0; display: grid; }
+.library-types > li:nth-child(odd) { background: #edf2eb; }
+.library-entry { display: grid; grid-template-columns: minmax(130px,.85fr) minmax(0,1.15fr) 20px; align-items: center; gap: 20px; width: 100%; min-height: clamp(104px,6vw,132px); padding: clamp(20px,1.5vw,32px); border: 0; border-radius: 0; background: transparent; color: #193d2b; text-align: left; font-family: inherit; }
+.library-entry-title { font-size: clamp(18px,1.15vw,23px); font-weight: 700; line-height: 1.5; }
+.library-entry-description { font-size: clamp(15px,.9vw,18px); line-height: 1.7; color: #385344; }
+.landing-page .library-entry:hover { transform: none; }
+.landing-page .library-entry:active { transform: none; }
+.landing-page .library-entry:focus-visible { outline-offset: -3px; }
+@media (hover: hover) and (pointer: fine) {
+  .library-entry:hover .library-entry-title { text-decoration: underline; text-underline-offset: 5px; }
+}
+.landing-information .landing-help { padding: clamp(28px,4vw,56px); margin-bottom: 32px; background: #edf2eb; }
+.help-heading { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center; gap: 40px; margin-bottom: 32px; }
+.help-heading h2 { margin-bottom: 0; }
+.help-heading > p { max-width: 480px; margin-bottom: 0; color: #385344; }
+.landing-faq { display: grid; gap: 8px; align-content: start; }
+.landing-faq details { padding: 22px 28px; background: #f9fbf8; }
+.landing-faq summary { position: relative; list-style: none; padding-right: 40px; cursor: pointer; font-size: clamp(16px,1vw,20px); line-height: 1.6; font-weight: 600; }
+.landing-faq summary::-webkit-details-marker { display: none; }
+.landing-faq summary::after { content: '+'; position: absolute; right: 0; top: 0; font-size: 25px; font-weight: 400; line-height: 1; transition: transform 200ms var(--landing-ease); }
+.landing-faq details[open] summary::after { transform: rotate(45deg); }
+.landing-faq details[open] { background: #fff; }
+.landing-faq details p { font-size: clamp(15px,.9vw,18px); color: #385344; margin: 16px 40px 0 0; max-width: 850px; }
+.landing-final-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding-block: 32px 64px; }
+.landing-final-cta h2 { font-size: clamp(27px,2.2vw,36px); margin-bottom: 12px; }
+.landing-final-cta p { margin: 0; color: #385344; }
+.landing-final-cta > button { flex-shrink: 0; }
+@media(max-width:1100px) {
+  .landing-page .header-actions { gap: 18px; }
+  .library-introduction { gap: 36px; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); }
+  .library-entry { grid-template-columns: minmax(0,1fr) 20px; gap: 8px 16px; }
+  .library-entry-title { grid-column: 1; }
+  .library-entry-description { grid-column: 1; }
+  .library-entry > svg { grid-column: 2; grid-row: 1 / 3; }
+}
+@media(max-width:820px) {
+  .landing-page .site-header { flex-wrap: wrap; padding-block: 18px; height: auto; }
+  .landing-page .header-actions { width: 100%; justify-content: flex-start; gap: 20px; flex-wrap: wrap; padding-bottom: 3px; }
+  .landing-page .header-actions > a { display: inline-flex !important; flex-shrink: 0; font-size: 12px; }
+  .landing-page .header-actions .support svg { display: none; }
+  .landing-page .header-actions .login-button { margin-left: auto; flex-shrink: 0; }
+  .library-introduction { grid-template-columns: minmax(0,1fr); gap: 28px; padding-block: 56px; }
+  .library-copy { padding-top: 0; }
+  .library-copy > p { max-width: 600px; }
+  .library-copy .library-access-note { max-width: none; }
+  .help-heading { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .help-heading > p { max-width: 600px; }
+}
+@media(max-width:560px) {
+  .landing-information h2 { font-size: 28px; letter-spacing: -.7px; }
+  .library-introduction { padding-block: 48px; }
+  .library-entry { padding: 20px; }
+  .landing-information .landing-help { width: 100%; padding: 32px var(--landing-gutter); margin-bottom: 0; }
+  .landing-faq details { padding: 20px; }
+  .landing-faq details p { margin-right: 0; }
+  .landing-faq summary { font-size: 15px; padding-right: 28px; }
+  .landing-final-cta { flex-direction: column; align-items: flex-start; padding-block: 40px; }
+  .landing-page .header-actions { gap: 12px 16px; }
+  .landing-page .header-actions > a { font-size: 11px; }
+}

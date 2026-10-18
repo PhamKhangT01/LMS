@@ -1,0 +1,43 @@
+{
+  "dataset": "law-lms-qa-v1",
+  "seededAt": "2026-10-18T07:46:00.518427Z",
+  "added": {
+    "BankQuestion": 27
+  },
+  "retained": {
+    "AppUser": 39,
+    "Course": 8,
+    "Lesson": 48,
+    "TeachingClass": 8,
+    "AuditEntry": 523,
+    "OfferingEnrollment": 70,
+    "Enrollment": 59,
+    "LessonCompletion": 286,
+    "ScheduleEvent": 28,
+    "ScheduleChange": 29,
+    "AttendanceRecord": 158,
+    "Quiz": 9,
+    "QuizQuestion": 27,
+    "QuizAttempt": 60,
+    "QuizAnswer": 191,
+    "GradeAppeal": 4,
+    "QuizAllowance": 1,
+    "ForumTopic": 12,
+    "ForumReply": 36,
+    "ForumSubscription": 36,
+    "Notification": 61,
+    "LibraryResource": 4
+  },
+  "accounts": {
+    "admin": "seed.admin@lms.test",
+    "head": "seed.truongkhoa@lms.test",
+    "lecturer": "seed.giangvien3@lms.test",
+    "student": "seed.hocvien01@lms.test"
+  },
+  "classCodes": [
+    "TEST-K49A1",
+    "TEST-K49A2",
+    "TEST-K49A3"
+  ],
+  "existingRowsPreserved": true
+}

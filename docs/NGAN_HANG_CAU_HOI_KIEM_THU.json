@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "bank access follows assigned course; students and unassigned lecturers are denied",
+    "essay creation, duplicate protection, ownership, revision conflict, archive and restore",
+    "DOCX-only objective creation, atomic duplicate import, filtered random draw and reuse from existing quizzes",
+    "quiz snapshots survive bank edits; shuffle settings persist through draft revision and review",
+    "concurrent starts, resume/draft/submit retain order; independent forms score against original answer text",
+    "automatic expiry preserves presentation; legacy attempts remain compatible"
+  ],
+  "schema": "lms_bank_a151fa198612",
+  "publicDatabaseUntouched": true
+}

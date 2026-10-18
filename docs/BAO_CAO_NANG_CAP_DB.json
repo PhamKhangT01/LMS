@@ -1,0 +1,28 @@
+{
+  "verifiedAt": "2026-10-16T14:02:50.823760+07:00",
+  "appliedMigrations": [
+    "0006_course_review_workflow.sql",
+    "0007_operational_workflow.sql",
+    "0008_appeal_proposal.sql",
+    "0009_notifications_allowances.sql"
+  ],
+  "publicLmsCounts": {
+    "users": 6,
+    "courses": 4,
+    "teachingClasses": 1,
+    "quizAttempts": 0
+  },
+  "preUpgradeBackup": ".backups/lms-backup-20261016-085634.dump",
+  "postUpgradeBackup": ".backups/lms-backup-20261016-140031.dump",
+  "storageBackup": ".backups/lms-backup-20261016-140031.files.tar.gz",
+  "verifiedRestore": {
+    "database": "lms_restore_a496b3e706",
+    "backup": "/Users/phamkhang/Documents/ChatGPT/LMS/.backups/lms-backup-20261016-085634.dump",
+    "restoredCounts": [
+      "users|6",
+      "courses|4",
+      "teaching_classes|1",
+      "quiz_attempts|0"
+    ]
+  }
+}
