@@ -1,3 +1,6 @@
+import { AuthoringDialog } from './AuthoringDialog';
+import { useUiConfirmation } from './useUiConfirmation';
+import { UiNotice } from './ui';
 import { FormEvent, useEffect, useState } from 'react';
 import { api, CourseDetail, User } from './api';
 
@@ -11,12 +14,16 @@ export function CourseEditor({ id, user, close, changed }: { id: string; user: U
   const [reason, setReason] = useState('');
   const [editingLessonId,setEditingLessonId]=useState<string|null>(null);
   const [lesson, setLesson] = useState({ title: '', content: '', durationMinutes: 45 });
+  const { ask, dialog: confirmationDialog } = useUiConfirmation();
+  const originalLesson = course?.lessons.find(item => item.id === editingLessonId);
+  const dirty = !!(reason.trim() || newCode.trim() || (originalLesson ? lesson.title !== originalLesson.title || lesson.content !== originalLesson.content || lesson.durationMinutes !== originalLesson.durationMinutes : lesson.title || lesson.content || lesson.durationMinutes !== 45));
+  const dismiss = async () => { if(busy)return; if(dirty && !await ask({title:'Bạn có thay đổi chưa lưu',description:'Nội dung đang chỉnh sửa sẽ bị mất nếu đóng.',confirmLabel:'Bỏ thay đổi và đóng'}))return;close(); };
   const manager = user.role === 'Admin' || user.role === 'DepartmentHead';
   const load = async () => { const result = await api.courseDetail(id); setCourse(result); };
   useEffect(() => { load().catch(error => setMessage(error.message)); }, [id]);
   const perform = async (operation: () => Promise<unknown>, success: string) => {
     setBusy(true); setMessage('');
-    try { await operation(); await load(); changed(); setMessage(success); }
+    try { await operation(); await load(); changed(); setReason(''); setMessage(success); }
     catch (error) { setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi.'); await load().catch(() => undefined); }
     finally { setBusy(false); }
   };
@@ -24,10 +31,10 @@ export function CourseEditor({ id, user, close, changed }: { id: string; user: U
     event.preventDefault();
     void perform(async () => { if(editingLessonId)await api.updateLesson(id,editingLessonId,{...lesson,revision:course!.revision});else await api.addLesson(id, lesson);setEditingLessonId(null); setLesson({ title: '', content: '', durationMinutes: 45 }); }, 'Đã lưu bài học.');
   };
-  return <div className="modal-backdrop"><section className="workflow-editor" role="dialog" aria-modal="true" aria-labelledby="workflow-title">
-    <header><div><p className="section-label">QUẢN LÝ NỘI DUNG</p><h2 id="workflow-title">{course?.title || 'Đang tải học phần…'}</h2></div><button type="button" onClick={close} disabled={busy} aria-label="Đóng">×</button></header>
+  return <><AuthoringDialog className="ui-form-dialog" titleId="workflow-title" close={() => {void dismiss();}}><section className="workflow-editor">
+    <header><div><p className="section-label">QUẢN LÝ NỘI DUNG</p><h2 id="workflow-title">{course?.title || 'Đang tải học phần…'}</h2></div><button type="button" onClick={()=>void dismiss()} disabled={busy} aria-label="Đóng">×</button></header>
     <div className="workflow-body">
-      {message && <p className="notice" role="status">{message}</p>}
+      {message && <UiNotice>{message}</UiNotice>}
       {course && <><ol className="workflow-steps">{['Soạn bản nháp', 'Chờ duyệt', 'Đã công bố'].map((label, index) => <li key={label} aria-current={course.status === index ? 'step' : undefined} className={course.status === index ? 'current' : ''}>{index + 1}. {label}</li>)}</ol>
       <p>{course.description}</p>
       <div className="workflow-columns"><main><h3>Nội dung học phần · {course.lessons.length} bài</h3>
@@ -42,5 +49,5 @@ export function CourseEditor({ id, user, close, changed }: { id: string; user: U
         <h3>Lịch sử xử lý</h3>{course.reviewHistory.length ? <ul className="workflow-history">{course.reviewHistory.map((entry, index) => <li key={index}><b>{entry.action === 'submit' ? 'Gửi duyệt' : entry.action === 'publish' ? 'Duyệt & công bố' : entry.action === 'copy' ? 'Tạo phiên bản học phần' : 'Yêu cầu chỉnh sửa'}</b><time>{new Date(entry.at).toLocaleString('vi-VN')}</time>{entry.reason && <p>{entry.reason}</p>}<small>Người xử lý: {entry.actorId}</small></li>)}</ul> : <p>Chưa có thao tác duyệt được ghi nhận.</p>}
       </aside></div></>}
     </div>
-  </section></div>;
+  </section></AuthoringDialog>{confirmationDialog}</>;
 }

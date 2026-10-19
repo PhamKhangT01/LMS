@@ -2,13 +2,13 @@
 .landing-page {
   --landing-gutter: clamp(20px,4vw,112px);
   --landing-content-width: calc(100% - var(--landing-gutter) - var(--landing-gutter));
-  --landing-ink: #193d2b;
+  --landing-ink: var(--ui-ink);
   --landing-ease: cubic-bezier(.22, 1, .36, 1);
   --landing-reveal-duration: 800ms;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: #f9fbf8;
+  background: var(--ui-background);
 }
 .landing-page > main { flex: 1; display: flex; flex-direction: column; }
 .landing-page .site-header { height: 84px; padding-inline: var(--landing-gutter); gap: 24px; }
@@ -51,7 +51,7 @@
 .landing-page button, .landing-page a { transition: transform 180ms var(--landing-ease), opacity 180ms ease; }
 .landing-page button { cursor: pointer; }
 .landing-page button:active { transform: scale(.97); }
-.landing-page :is(a, button):focus-visible { outline: 3px solid #b89b46; outline-offset: 5px; }
+.landing-page :is(a, button):focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 5px; }
 .landing-page button > svg { transition: transform 180ms var(--landing-ease); }
 @media (hover: hover) and (pointer: fine) {
   .landing-page button:hover { transform: translateY(-2px); }
@@ -66,7 +66,7 @@
 .landing-page .library-types > .reveal.is-visible { animation-name: landing-list-enter; }
 .landing-page .landing-faq > .reveal.is-visible { animation-name: landing-fade; animation-duration: 600ms; }
 .landing-page .landing-faq details[open] > p { animation: landing-enter 280ms var(--landing-ease) backwards; }
-.landing-page .landing-faq summary:focus-visible { outline: 3px solid #b89b46; outline-offset: 5px; }
+.landing-page .landing-faq summary:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 5px; }
 .landing-page .modal-backdrop { animation: landing-fade 200ms ease backwards; }
 .landing-page .login-modal { animation: landing-dialog-enter 320ms var(--landing-ease) backwards; }
 @keyframes landing-enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }

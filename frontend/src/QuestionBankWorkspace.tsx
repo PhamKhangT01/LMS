@@ -1,8 +1,8 @@
-import { FormEvent, ReactNode, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { AlertCircle, Archive, ArrowLeft, Check, CheckCircle2, ChevronLeft, ChevronRight, FileText, Filter, LoaderCircle, Plus, RotateCcw, Search, Shuffle, Upload, X } from 'lucide-react';
 import { User } from './api';
 import { BankCourse, BankPage, BankQuestion, bankRequest, difficulties, questionTypes } from './questionBankApi';
+import { AuthoringDialog as BankDialog } from './AuthoringDialog';
 import './question-bank.css';
 
 type Props = { user: User; fixedCourseId?: string; onPick?: (rows: BankQuestion[]) => void; excludedIds?: string[]; close?: () => void; createQuiz?: () => void };
@@ -10,21 +10,6 @@ type Filters = { query: string; topic: string; type: string; difficulty: string;
 const clearFilters: Filters = { query: '', topic: '', type: '', difficulty: '', includeArchived: false };
 const errorText = (error: unknown) => error instanceof Error ? error.message : 'Không thể xử lý. Vui lòng thử lại.';
 const pointsText = (value: number) => value.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
-
-function BankDialog({ titleId, close, children, compact = false }: { titleId: string; close: () => void; children: ReactNode; compact?: boolean }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  const onClose = useRef(close);
-  onClose.current = close;
-  useEffect(() => {
-    const dialog = ref.current!;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    dialog.showModal();
-    return () => { dialog.close(); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
-  }, []);
-  return createPortal(<dialog ref={ref} className={'bank-modal' + (compact ? ' bank-modal-compact' : '')} aria-labelledby={titleId} onCancel={event => { event.preventDefault(); event.stopPropagation(); onClose.current(); }} onSubmit={event => event.stopPropagation()}>{children}</dialog>, document.body);
-}
 
 function DiscardDialog({ selection = false, cancel, discard }: { selection?: boolean; cancel: () => void; discard: () => void }) {
   return <BankDialog titleId="bank-discard-title" close={cancel} compact><div className="bank-discard"><AlertCircle size={30}/><h2 id="bank-discard-title">{selection ? 'Bỏ danh sách đang chọn?' : 'Bạn có thay đổi chưa lưu'}</h2><p>{selection ? 'Các câu đang chọn chưa được thêm vào đề. Bạn có thể tiếp tục chọn hoặc đóng bộ chọn.' : 'Nội dung vừa chỉnh sửa sẽ bị mất nếu đóng. Bạn có thể quay lại để kiểm tra và lưu câu hỏi.'}</p><div className="bank-actions"><button type="button" autoFocus onClick={cancel}>{selection ? 'Tiếp tục chọn' : 'Tiếp tục chỉnh sửa'}</button><button type="button" className="bank-secondary" onClick={discard}>{selection ? 'Bỏ lựa chọn & đóng' : 'Bỏ thay đổi'}</button></div></div></BankDialog>;

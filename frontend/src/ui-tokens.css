@@ -1,0 +1,38 @@
+:root {
+  --ui-font: 'Be Vietnam Pro', sans-serif;
+  --ui-primary: #28543a;
+  --ui-primary-hover: #1e442e;
+  --ui-ink: #193d2b;
+  --ui-muted: #5a6c5e;
+  --ui-background: #f5f7f3;
+  --ui-surface: #fff;
+  --ui-subtle: #edf3ea;
+  --ui-border: #dbe3db;
+  --ui-border-strong: #b5c7b7;
+  --ui-focus: #ac8937;
+  --ui-success: #24613b;
+  --ui-success-bg: #eaf4ec;
+  --ui-warning: #775719;
+  --ui-warning-bg: #fbf3df;
+  --ui-danger: #a33030;
+  --ui-danger-bg: #fff0ee;
+  --ui-info: #34566d;
+  --ui-info-bg: #edf3f7;
+  --ui-text-xs: 12px;
+  --ui-text-sm: 13px;
+  --ui-text-md: 14px;
+  --ui-text-body: 16px;
+  --ui-text-section: 20px;
+  --ui-text-title: clamp(26px, 2.3vw, 32px);
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-6: 24px;
+  --ui-space-8: 32px;
+  --ui-space-12: 48px;
+  --ui-radius-control: 8px;
+  --ui-radius-panel: 12px;
+  --ui-control-height: 44px;
+  --ui-modal-shadow: 0 24px 72px #10251930;
+}

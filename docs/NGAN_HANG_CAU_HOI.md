@@ -4,7 +4,7 @@
 
 1. Giảng viên vào **Ngân hàng câu hỏi**, chọn học phần được phân công. Có thể thêm tự luận thủ công, nhập trắc nghiệm từ DOCX hoặc vào lớp học phần → bài kiểm tra → **Lưu vào ngân hàng**.
 2. Phân loại bằng chủ đề và độ khó: Cơ bản, Vận dụng, Nâng cao. Điểm của câu trong ngân hàng là điểm mặc định khi sử dụng.
-3. Khi tạo hoặc sửa đề nháp, chọn đúng lớp/học phần rồi bấm **Chọn từ ngân hàng**. Lọc dạng câu, chủ đề, độ khó; tích từng câu hoặc nhập số lượng và bấm **Chọn ngẫu nhiên**. Có thể kết hợp nhiều nhóm lọc trước khi thêm vào đề. Các câu đã có trong đề hoặc đã chọn được loại khỏi lần rút ngẫu nhiên tiếp theo.
+3. Khi tạo hoặc sửa đề nháp, chọn đúng lớp/học phần rồi bấm **Chọn từ ngân hàng**. Tìm theo từ khóa, lọc dạng câu/chủ đề/độ khó; tích từng câu, chọn cả trang hoặc nhập số lượng và bấm **Chọn thêm** trong vùng chọn ngẫu nhiên. Các câu đã có trong đề hoặc đã chọn được loại khỏi lần rút tiếp theo. Mục **Đã chọn** hiển thị đầy đủ danh sách và tổng điểm trước khi thêm vào đề; có thể bỏ từng câu tại đây.
 4. Câu được sao chép vào danh sách soạn đề. Giảng viên có thể chỉnh nội dung/điểm của bản sao. Sửa hoặc lưu trữ câu gốc trong ngân hàng không cập nhật các đề đã lưu.
 5. Bật **Trộn thứ tự câu hỏi** và/hoặc **Trộn phương án trắc nghiệm** theo từng lượt làm. Sau đó lưu nháp → gửi duyệt → Trưởng khoa công bố theo workflow hiện có.
 6. Học viên bắt đầu bài: máy chủ tạo và lưu thứ tự riêng cho lượt đó. Lưu nháp, đóng/mở lại, nộp hoặc hết giờ đều dùng cùng thứ tự. Một lượt mới có thứ tự trộn độc lập.
@@ -61,3 +61,21 @@ python3 scripts/seed_test_data.py --verify-only
 - Bộ chọn ngân hàng hiển thị ngoài form soạn đề, tránh thao tác Enter trong ô tìm kiếm gửi form đề. Đã sửa viền ô tìm kiếm và trạng thái tải dữ liệu.
 
 ![Ngân hàng câu hỏi trên trình duyệt](ngan-hang-cau-hoi-kiem-tra.jpg)
+
+## Cải tiến trải nghiệm sử dụng
+
+- Trang ngân hàng có tiêu đề và thao tác riêng: tạo đề, nhập trắc nghiệm DOCX, thêm tự luận. Bỏ tiêu đề chào mừng lặp lại để dành chỗ cho danh sách.
+- Tìm kiếm và bộ lọc có nhãn rõ ràng, hiển thị bộ lọc đang áp dụng và nút xóa. Trên điện thoại, **Bộ lọc chi tiết** có thể mở/thu gọn; học phần và tìm kiếm luôn sẵn dùng.
+- Bộ chọn có hai mục **Ngân hàng / Đã chọn**, chọn cả trang, tổng số câu/tổng điểm và thanh thêm vào đề luôn hiện. Giới hạn 200 câu bao gồm các câu đã có trong đề. Chọn ngẫu nhiên áp dụng cả từ khóa tìm kiếm.
+- Câu trắc nghiệm được hiển thị đáp án đúng bằng dấu kiểm và nhãn A/B/C/D; câu nhiều đáp án không còn hiển thị chuỗi JSON.
+- Nhập DOCX có hộp chọn/kéo thả tệp, kiểm tra định dạng/dung lượng và chủ đề/độ khó riêng; bộ lọc tìm kiếm không quyết định metadata khi nhập.
+- Form câu hỏi hiển thị trường bắt buộc, số ký tự và trạng thái chưa lưu. Hộp cảnh báo trong LMS bảo vệ nội dung hoặc danh sách đang chọn khi đóng. Nút tiếp tục được ưu tiên focus; Escape, khóa focus trong hộp thoại và trả focus khi đóng dùng cơ chế dialog của trình duyệt.
+- Có phản hồi thành công/lỗi riêng, nút tải lại khi lỗi kết nối và hoàn tác thao tác lưu trữ vừa thực hiện. Nút Hủy form tạo đề hiển thị cả trên mobile.
+
+Đã kiểm tra trực tiếp tại **1287 × 1204** và **390 × 844**: tìm kiếm rỗng/xóa lọc; chọn DOCX trước khi nhập; giữ nội dung khi hủy đóng form; chọn cả 5 câu (20 điểm), bỏ 1 câu còn 4 câu (17 điểm), giữ lựa chọn khi hủy đóng và thêm vào form đề; mở/thu gọn bộ lọc mobile; form tự luận mobile và nút Hủy tạo đề. Các bản nhập thử được đóng, không lưu thành câu hỏi/đề mới trong database local. Nút thử lại cũng đã khôi phục dữ liệu sau một lần API local khởi động lại.
+
+Kiểm tra tự động: frontend/backend build thành công, 37 kiểm thử .NET đạt; kiểm thử tích hợp ngân hàng/trộn đề đạt, gồm trường hợp rút câu theo từ khóa và từ khóa không có kết quả. Cảnh báo NuGet `NU1900` về nguồn dữ liệu lỗ hổng vẫn như trên.
+
+![Giao diện ngân hàng desktop](ngan-hang-ux-desktop.jpg)
+![Kiểm tra danh sách trước khi thêm vào đề](ngan-hang-ux-chon-cau.jpg)
+![Bộ chọn trên mobile](ngan-hang-ux-mobile.jpg)
