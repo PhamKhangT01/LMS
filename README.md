@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# LMS
-=======
 # LMS Khoa Luật — Học viện An ninh nhân dân
 
 Hệ thống LMS gồm React/Vite, ASP.NET Core 9 và PostgreSQL. Backend được tổ chức theo **Clean Architecture** để tách biệt nghiệp vụ, hạ tầng và HTTP API.
@@ -45,7 +42,7 @@ Schema được quản lý bằng các script SQL đánh số trong `backend/dat
 
 ```bash
 python3 scripts/database.py backup
-python3 scripts/database.py upgrade 0006_course_review_workflow.sql 0007_operational_workflow.sql 0008_appeal_proposal.sql 0009_notifications_allowances.sql 0010_quiz_component_weights.sql 0011_schedule.sql 0012_class_forum.sql 0013_attendance.sql
+python3 scripts/database.py upgrade 0006_course_review_workflow.sql 0007_operational_workflow.sql 0008_appeal_proposal.sql 0009_notifications_allowances.sql 0010_quiz_component_weights.sql 0011_schedule.sql 0012_class_forum.sql 0013_attendance.sql 0014_question_bank_shuffle.sql
 ```
 
 Script cần các bảng của `0001`–`0005` đã có. Bảng `lms_schema_versions` ghi nhận script đã áp dụng. Database mới từ Docker Compose nhận toàn bộ script SQL khi khởi tạo volume lần đầu.
@@ -95,4 +92,3 @@ Kiểm thử: `dotnet test tests/LawLms.WorkflowTests/LawLms.WorkflowTests.cspro
 API local mặc định cổng 5155. Có thể chạy bản đã build bằng `python3 scripts/run_local.py`; `--restart` khởi động lại tiến trình backend của chính dự án. Trưởng khoa cần cấu hình lịch và chính sách thật cho các lớp cũ trước khi mở; script migration giữ chúng ở bản nháp thay vì tự suy diễn lịch đào tạo.
 
 Email/SMS, SSO/SIS và hạ tầng production chưa được cấu hình. Bản local và kiểm thử tự động không thay cho nghiệm thu học vụ, kiểm thử tải và cam kết RPO/RTO của đơn vị.
->>>>>>> ef946aa (kkk)

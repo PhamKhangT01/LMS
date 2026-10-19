@@ -5,7 +5,7 @@ export type BankPage = {items:BankQuestion[];total:number;page:number;pageSize:n
 const base=import.meta.env.VITE_API_URL||'http://localhost:5155/api';
 export async function bankRequest<T>(path='',method='GET',body?:unknown):Promise<T>{
   const form=body instanceof FormData;
-  const r=await fetch(base+'/question-bank'+path,{method,headers:{Authorization:`Bearer ${session.token}`,...(form?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:form?body:JSON.stringify(body)});
+  const r=await fetch(base+'/question-bank'+path,{method,headers:{Authorization:`Bearer ${session.token}`,...(form?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:form?body:JSON.stringify(body)}).catch(()=>{throw new Error('Không kết nối được máy chủ. Vui lòng kiểm tra kết nối rồi thử lại.');});
   if(r.status===401){session.clear();window.dispatchEvent(new Event('lms-session-expired'));}
   if(r.status===204)return undefined as T;
   const data=await r.json().catch(()=>({}));

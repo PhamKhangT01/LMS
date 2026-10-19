@@ -8,6 +8,6 @@
     "concurrent starts, resume/draft/submit retain order; independent forms score against original answer text",
     "automatic expiry preserves presentation; legacy attempts remain compatible"
   ],
-  "schema": "lms_bank_a151fa198612",
+  "schema": "lms_bank_365abd85a975",
   "publicDatabaseUntouched": true
 }

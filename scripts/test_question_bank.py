@@ -90,6 +90,9 @@ def run(password,pg_env):
     choices=req(base+query+'&type=0&difficulty=0&topic=DOCX',teacher)['items'];assert len(choices)==6
     drawn=req(base+'/draw',teacher,'POST',{'courseId':cid,'count':6,'type':0,'topic':'DOCX','difficulty':0})
     assert len({x['id'] for x in drawn})==6
+    matching=req(base+'/draw',teacher,'POST',{'courseId':cid,'count':1,'query':'độc lập số 3','type':0,'topic':'DOCX','difficulty':0})
+    assert len(matching)==1 and 'độc lập số 3' in matching[0]['content']
+    req(base+'/draw',teacher,'POST',{'courseId':cid,'count':1,'query':'khong-co-tu-khoa-nay'},status=409)
     req(base+'/draw',teacher,'POST',{'courseId':cid,'count':1,'type':0,'topic':'DOCX','excludeIds':[x['id'] for x in drawn]},status=409)
     source=next(x for x in req('/operations/offerings/'+oid+'/quizzes',teacher) if x['status']==1)
     assert req(base+'/from-quiz/'+source['id'],teacher,'POST',{'topic':'','difficulty':1})['skipped']==2

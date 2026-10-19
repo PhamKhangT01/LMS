@@ -49,6 +49,7 @@
 }
 @media (max-width: 900px) {
   .dashboard-main { display: flex; }
+  .dashboard-main > aside { width: 100%; max-width: 100%; min-width: 0; }
   .dashboard-content { width: 100%; padding: 24px var(--workspace-gutter) 40px; }
   .dashboard-content :is(.dash-course-grid, .class-list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .resource-list { grid-template-columns: 1fr; }

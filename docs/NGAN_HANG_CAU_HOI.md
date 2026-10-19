@@ -52,3 +52,12 @@ python3 scripts/seed_test_data.py --verify-only
 ```
 
 `test_question_bank.py` dùng schema PostgreSQL và API cổng 5169 riêng (có thể đặt `LMS_BANK_TEST_PORT`), xóa schema sau khi chạy. Bao phủ phạm vi học phần, chủ sở hữu, dữ liệu cũ, nhập trùng/lỗi, chọn ngẫu nhiên, snapshot đề, sửa cấu hình, duyệt đề, bắt đầu đồng thời, lưu/tiếp tục/nộp, chấm tự động, hết giờ và xuất hồ sơ. Báo cáo: `docs/NGAN_HANG_CAU_HOI_KIEM_THU.json`.
+
+## Xác nhận hoàn thiện ngày 19/10/2026
+
+- Database local đã có migration `0014` và 27 câu hỏi kiểm thử; không cần nạp lại.
+- Frontend và backend build thành công; 37 kiểm thử .NET và toàn bộ kiểm thử tích hợp ngân hàng/trộn đề đạt. Backend có cảnh báo `NU1900` do không truy cập được nguồn thông tin lỗ hổng NuGet.
+- Kiểm tra trên trình duyệt với giảng viên kiểm thử: mở ngân hàng `TEST-DS`, chọn ngẫu nhiên 3 câu, đưa vào form soạn đề và sửa phương án của câu nhiều đáp án; đáp án đã chọn vẫn giữ đúng. Bản soạn kiểm tra được hủy sau khi xác nhận.
+- Bộ chọn ngân hàng hiển thị ngoài form soạn đề, tránh thao tác Enter trong ô tìm kiếm gửi form đề. Đã sửa viền ô tìm kiếm và trạng thái tải dữ liệu.
+
+![Ngân hàng câu hỏi trên trình duyệt](ngan-hang-cau-hoi-kiem-tra.jpg)

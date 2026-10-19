@@ -14,7 +14,7 @@ public record BankEdit(string Content, IReadOnlyList<string> Options, string Cor
 public record BankArchive(bool Archived, int Revision);
 public record BankImportResult(int Added, int Skipped);
 public record BankFromQuiz(string Topic = "", QuestionDifficulty Difficulty = QuestionDifficulty.Medium);
-public record BankDraw(Guid CourseId, int Count, string? Topic = null, QuestionType? Type = null, QuestionDifficulty? Difficulty = null, IReadOnlyList<Guid>? ExcludeIds = null);
+public record BankDraw(Guid CourseId, int Count, string? Topic = null, QuestionType? Type = null, QuestionDifficulty? Difficulty = null, IReadOnlyList<Guid>? ExcludeIds = null, string? Query = null);
 public interface IQuestionBankService
 {
     Task<IReadOnlyList<BankCourse>> CoursesAsync(Actor actor, CancellationToken ct);

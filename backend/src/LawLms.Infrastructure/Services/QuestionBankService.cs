@@ -105,6 +105,7 @@ public sealed class QuestionBankService(LmsDbContext db) : IQuestionBankService
         await Access(command.CourseId,actor,ct);
         if(command.Count is <1 or >200 || command.ExcludeIds?.Count>200)throw new ConflictException("Chọn ngẫu nhiên từ 1 đến 200 câu hỏi.");
         var rows=Filter(db.BankQuestions.AsNoTracking().Where(x=>x.CourseId==command.CourseId&&!x.IsArchived),command.Topic,command.Type,command.Difficulty);
+        if (!string.IsNullOrWhiteSpace(command.Query)) { var text=command.Query.Trim().ToLower(); rows=rows.Where(x=>x.Content.ToLower().Contains(text) || x.Topic.ToLower().Contains(text)); }
         if(command.ExcludeIds is {Count:>0})rows=rows.Where(x=>!command.ExcludeIds.Contains(x.Id));
         var ids=await rows.Select(x=>x.Id).ToListAsync(ct);
         if(ids.Count<command.Count)throw new ConflictException($"Chỉ còn {ids.Count} câu hỏi phù hợp chưa được chọn.");
