@@ -1,6 +1,7 @@
+import { X } from 'lucide-react';
 import { AuthoringDialog } from './AuthoringDialog';
 import { useUiConfirmation } from './useUiConfirmation';
-import { UiNotice } from './ui';
+import { useFeedback, UiNotice } from './ui';
 import { FormEvent, useEffect, useState } from 'react';
 import { api, CourseDetail, User } from './api';
 
@@ -8,7 +9,7 @@ import './workflow.css';
 
 export function CourseEditor({ id, user, close, changed }: { id: string; user: User; close: () => void; changed: () => void }) {
   const [course, setCourse] = useState<CourseDetail | null>(null);
-  const [message, setMessage] = useState('');
+  const [message, setMessage, messageTone] = useFeedback();
   const [busy, setBusy] = useState(false);
   const [newCode,setNewCode]=useState('');
   const [reason, setReason] = useState('');
@@ -20,11 +21,11 @@ export function CourseEditor({ id, user, close, changed }: { id: string; user: U
   const dismiss = async () => { if(busy)return; if(dirty && !await ask({title:'Bạn có thay đổi chưa lưu',description:'Nội dung đang chỉnh sửa sẽ bị mất nếu đóng.',confirmLabel:'Bỏ thay đổi và đóng'}))return;close(); };
   const manager = user.role === 'Admin' || user.role === 'DepartmentHead';
   const load = async () => { const result = await api.courseDetail(id); setCourse(result); };
-  useEffect(() => { load().catch(error => setMessage(error.message)); }, [id]);
+  useEffect(() => { load().catch(error => setMessage.error(error.message)); }, [id]);
   const perform = async (operation: () => Promise<unknown>, success: string) => {
     setBusy(true); setMessage('');
-    try { await operation(); await load(); changed(); setReason(''); setMessage(success); }
-    catch (error) { setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi.'); await load().catch(() => undefined); }
+    try { await operation(); await load(); changed(); setReason(''); setMessage.success(success); }
+    catch (error) { setMessage.error(error instanceof Error ? error.message : 'Không thể lưu thay đổi.'); await load().catch(() => undefined); }
     finally { setBusy(false); }
   };
   const add = (event: FormEvent) => {
@@ -32,9 +33,9 @@ export function CourseEditor({ id, user, close, changed }: { id: string; user: U
     void perform(async () => { if(editingLessonId)await api.updateLesson(id,editingLessonId,{...lesson,revision:course!.revision});else await api.addLesson(id, lesson);setEditingLessonId(null); setLesson({ title: '', content: '', durationMinutes: 45 }); }, 'Đã lưu bài học.');
   };
   return <><AuthoringDialog className="ui-form-dialog" titleId="workflow-title" close={() => {void dismiss();}}><section className="workflow-editor">
-    <header><div><p className="section-label">QUẢN LÝ NỘI DUNG</p><h2 id="workflow-title">{course?.title || 'Đang tải học phần…'}</h2></div><button type="button" onClick={()=>void dismiss()} disabled={busy} aria-label="Đóng">×</button></header>
+    <header><div><p className="section-label">QUẢN LÝ NỘI DUNG</p><h2 id="workflow-title">{course?.title || 'Đang tải học phần…'}</h2></div><button type="button" onClick={()=>void dismiss()} disabled={busy} aria-label="Đóng"><X size={20}/>Đóng</button></header>
     <div className="workflow-body">
-      {message && <UiNotice>{message}</UiNotice>}
+      {message && <UiNotice tone={messageTone}>{message}</UiNotice>}
       {course && <><ol className="workflow-steps">{['Soạn bản nháp', 'Chờ duyệt', 'Đã công bố'].map((label, index) => <li key={label} aria-current={course.status === index ? 'step' : undefined} className={course.status === index ? 'current' : ''}>{index + 1}. {label}</li>)}</ol>
       <p>{course.description}</p>
       <div className="workflow-columns"><main><h3>Nội dung học phần · {course.lessons.length} bài</h3>

@@ -75,6 +75,8 @@ app.Use(async (context, next) =>
     context.Response.Headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()";
     await next();
 });
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.UseCors("frontend");
 app.UseAuthentication();
 app.UseRateLimiter();
@@ -85,4 +87,19 @@ app.MapGet("/health/live", () => Results.Ok(new { status = "live" })).AllowAnony
 app.MapGet("/health/ready", async (LmsDbContext db, CancellationToken ct) => await db.Database.CanConnectAsync(ct) ? Results.Ok(new { status = "ready" }) : Results.StatusCode(StatusCodes.Status503ServiceUnavailable)).AllowAnonymous();
 app.MapGet("/health", async (LmsDbContext db, CancellationToken ct) => await db.Database.CanConnectAsync(ct) ? Results.Ok(new { status = "healthy" }) : Results.StatusCode(StatusCodes.Status503ServiceUnavailable)).AllowAnonymous();
 if (builder.Configuration.GetValue<bool>("Database:SeedDemoData")) { using var scope = app.Services.CreateScope(); await DbSeeder.SeedAsync(scope.ServiceProvider.GetRequiredService<LmsDbContext>()); }
+// Serve React routes while preserving real 404 responses for API/health paths.
+app.MapFallback(async context =>
+{
+    if (Path.HasExtension(context.Request.Path.Value) || context.Request.Path.StartsWithSegments("/api") || context.Request.Path.StartsWithSegments("/health") ||
+        (context.Request.Method != "GET" && context.Request.Method != "HEAD"))
+    {
+        context.Response.StatusCode = StatusCodes.Status404NotFound;
+        return;
+    }
+    var index = Path.Combine(app.Environment.WebRootPath ?? Path.Combine(app.Environment.ContentRootPath, "wwwroot"), "index.html");
+    if (!File.Exists(index)) { context.Response.StatusCode = StatusCodes.Status404NotFound; return; }
+    context.Response.ContentType = "text/html; charset=utf-8";
+    context.Response.Headers.CacheControl = "no-cache";
+    await context.Response.SendFileAsync(index);
+});
 app.Run();

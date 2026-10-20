@@ -1,0 +1,27 @@
+# Free preview deployment. PostgreSQL is supplied separately (e.g. Neon).
+# Uploaded files are ephemeral on Render Free; see docs/DEPLOY.md.
+services:
+  - type: web
+    name: law-lms
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health/ready
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:8080
+      - key: ConnectionStrings__LmsDatabase
+        sync: false
+      - key: Jwt__Key
+        generateValue: true
+      - key: Jwt__Issuer
+        value: LawLms.Api
+      - key: Jwt__Audience
+        value: LawLms.Client
+      - key: Database__SeedDemoData
+        value: "false"
+      - key: Storage__RootPath
+        value: /data/uploads

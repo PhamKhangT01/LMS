@@ -1,0 +1,587 @@
+{
+  "date": "2026-10-20",
+  "scope": "Unified UI; representative browser scenarios, not exhaustive business integration tests",
+  "passed": true,
+  "screenCount": 43,
+  "viewports": [
+    "1287x1204",
+    "768x1024",
+    "390x844"
+  ],
+  "checks": [
+    {
+      "name": "admin-desktop-lop",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Lớp học phần"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-tong-quan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Quản trị hệ thống",
+        "Danh sách học phần",
+        "Phân công giảng dạy theo lớp"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-hoc-lieu",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Kho học liệu số"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-lich",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Thời khóa biểu"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-bao-cao",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Báo cáo học vụ"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-tai-khoan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Quản lý tài khoản"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-ngan-hang",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Ngân hàng câu hỏi"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-desktop-dien-dan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Diễn đàn lớp học"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "admin-tablet-tai-khoan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Quản lý tài khoản"
+      ],
+      "height": 1024,
+      "pageWidth": 768,
+      "primary": "#28543a",
+      "width": 768
+    },
+    {
+      "name": "admin-tablet-bao-cao",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Báo cáo học vụ"
+      ],
+      "height": 1024,
+      "pageWidth": 768,
+      "primary": "#28543a",
+      "width": 768
+    },
+    {
+      "name": "admin-tablet-hoc-lieu",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Kho học liệu số"
+      ],
+      "height": 1024,
+      "pageWidth": 768,
+      "primary": "#28543a",
+      "width": 768
+    },
+    {
+      "name": "admin-tablet-lich",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Thời khóa biểu"
+      ],
+      "height": 1024,
+      "pageWidth": 768,
+      "primary": "#28543a",
+      "width": 768
+    },
+    {
+      "name": "admin-mobile-tai-khoan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Quản lý tài khoản"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-mobile-bao-cao",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Báo cáo học vụ"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-mobile-hoc-lieu",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Kho học liệu số"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-mobile-hoc-lieu-loc",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Kho học liệu số"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-mobile-lich",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Thời khóa biểu"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-mobile-form-lich",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Thời khóa biểu",
+        "Thêm lịch học hoặc lịch thi"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "mobile-xac-nhan-chua-luu",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Thời khóa biểu",
+        "Thêm lịch học hoặc lịch thi",
+        "Bạn có thay đổi chưa lưu"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-mobile-import-hoc-vien",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Lớp học phần",
+        "Nhập và đối soát danh sách học viên"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "truong-khoa-desktop-hoc-phan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Học phần & phân công",
+        "Danh sách học phần",
+        "Phân công giảng dạy theo lớp"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "truong-khoa-desktop-form-phan-cong",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Học phần & phân công",
+        "Danh sách học phần",
+        "Phân công giảng dạy theo lớp",
+        "Phân công lớp"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "truong-khoa-desktop-noi-dung",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Học phần & phân công",
+        "Danh sách học phần",
+        "Phân công giảng dạy theo lớp",
+        "Luật Dân sự"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "truong-khoa-mobile-noi-dung",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Học phần & phân công",
+        "Danh sách học phần",
+        "Phân công giảng dạy theo lớp",
+        "Luật Dân sự"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "truong-khoa-mobile-bao-cao",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Báo cáo học vụ"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "giang-vien-desktop-ngan-hang",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Ngân hàng câu hỏi"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "giang-vien-mobile-chon-cau",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Ngân hàng câu hỏi",
+        "Tạo bài kiểm tra",
+        "Danh sách câu hỏi",
+        "Chọn câu hỏi cho đề"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "giang-vien-mobile-soan-de",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Ngân hàng câu hỏi",
+        "Tạo bài kiểm tra",
+        "Danh sách câu hỏi"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "giang-vien-mobile-nhap-docx",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Ngân hàng câu hỏi",
+        "Nhập trắc nghiệm từ DOCX"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "giang-vien-mobile-tu-luan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Ngân hàng câu hỏi",
+        "Thêm câu hỏi tự luận"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "giang-vien-mobile-cham-bai",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Lớp học phần",
+        "Lê Ngọc Anh (Kiểm thử) · [TEST] Tự luận tình huống · [TEST] Luật Dân sự"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "hoc-vien-mobile-lop",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Lớp học phần"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "hoc-vien-mobile-bao-cao",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Báo cáo học tập"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "hoc-vien-mobile-bai-hoc",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "[TEST] Luật Dân sự",
+        "6 bài học",
+        "Khái quát và mục tiêu học phần"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "hoc-vien-desktop-bai-hoc",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "[TEST] Luật Dân sự",
+        "6 bài học",
+        "Khái quát và mục tiêu học phần"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "hoc-vien-desktop-dien-dan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Diễn đàn lớp học"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "hoc-vien-desktop-bao-cao",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Báo cáo học tập"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "trang-chu-desktop",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "HỆ THỐNGQUẢN LÝ HỌC TẬPKHOA LUẬT · HỌC VIỆN AN NINH NHÂN DÂN",
+        "Đào tạo pháp luậttrong kỷ nguyên số",
+        "Kho học liệu pháp luật",
+        "Hướng dẫn bắt đầu",
+        "Sẵn sàng vào lớp học?"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "dang-nhap-loi",
+      "error": [
+        "Email hoặc mật khẩu không chính xác."
+      ],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "HỆ THỐNGQUẢN LÝ HỌC TẬPKHOA LUẬT · HỌC VIỆN AN NINH NHÂN DÂN",
+        "Đào tạo pháp luậttrong kỷ nguyên số",
+        "Kho học liệu pháp luật",
+        "Hướng dẫn bắt đầu",
+        "Sẵn sàng vào lớp học?",
+        "Đăng nhập LMS"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    },
+    {
+      "name": "trang-chu-tablet",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "HỆ THỐNGQUẢN LÝ HỌC TẬPKHOA LUẬT · HỌC VIỆN AN NINH NHÂN DÂN",
+        "Đào tạo pháp luậttrong kỷ nguyên số",
+        "Kho học liệu pháp luật",
+        "Hướng dẫn bắt đầu",
+        "Sẵn sàng vào lớp học?"
+      ],
+      "height": 1024,
+      "pageWidth": 768,
+      "primary": "#28543a",
+      "width": 768
+    },
+    {
+      "name": "trang-chu-mobile",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "HỆ THỐNGQUẢN LÝ HỌC TẬPKHOA LUẬT · HỌC VIỆN AN NINH NHÂN DÂN",
+        "Đào tạo pháp luậttrong kỷ nguyên số",
+        "Kho học liệu pháp luật",
+        "Hướng dẫn bắt đầu",
+        "Sẵn sàng vào lớp học?"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "trang-chu-mobile-huong-dan",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "HỆ THỐNGQUẢN LÝ HỌC TẬPKHOA LUẬT · HỌC VIỆN AN NINH NHÂN DÂN",
+        "Đào tạo pháp luậttrong kỷ nguyên số",
+        "Kho học liệu pháp luật",
+        "Hướng dẫn bắt đầu",
+        "Sẵn sàng vào lớp học?"
+      ],
+      "height": 844,
+      "pageWidth": 390,
+      "primary": "#28543a",
+      "width": 390
+    },
+    {
+      "name": "admin-desktop-import-hoc-vien",
+      "error": [],
+      "font": "\"Be Vietnam Pro\", sans-serif",
+      "heading": [
+        "Lớp học phần",
+        "Nhập và đối soát danh sách học viên"
+      ],
+      "height": 1204,
+      "pageWidth": 1287,
+      "primary": "#28543a",
+      "width": 1287
+    }
+  ],
+  "notReverified": [
+    "Server-side exam timing and submission",
+    "Actual XLSX/DOCX import writes",
+    "Grading and approval persistence"
+  ]
+}

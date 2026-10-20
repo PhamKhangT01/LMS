@@ -27,7 +27,7 @@
 .landing-page .hero-content > h1 { animation-delay: .08s; }
 .landing-page .hero-content > p:not(.hero-kicker) { animation-delay: .16s; }
 .landing-page .hero-content > button { animation-delay: .24s; }
-.landing-page .hero-login { border-radius: 4px; box-shadow: none; padding: 14px 22px; font-size: 14px; } /* taste-skill-ignore: clears an inherited shadow from the shared stylesheet */
+.landing-page .hero-login { border-radius: var(--ui-radius-control); box-shadow: none; padding: 14px 22px; font-size: 14px; } /* taste-skill-ignore: clears an inherited shadow from the shared stylesheet */
 .landing-overview {
   flex: none;
   width: var(--landing-content-width); margin: clamp(32px,4vw,80px) auto 0;

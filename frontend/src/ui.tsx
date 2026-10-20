@@ -1,5 +1,15 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { AlertCircle, CheckCircle2, Info } from 'lucide-react';
+
+type FeedbackTone = 'info' | 'success' | 'warning' | 'error';
+export function useFeedback() {
+  const [feedback, setFeedback] = useState<{ message: string; tone: FeedbackTone }>({ message: '', tone: 'info' });
+  const notify = useMemo(() => Object.assign(
+    (message: string) => setFeedback({ message, tone: 'info' }),
+    { error: (message: string) => setFeedback({ message, tone: 'error' }), success: (message: string) => setFeedback({ message, tone: 'success' }) },
+  ), []);
+  return [feedback.message, notify, feedback.tone] as const;
+}
 
 export function UiNotice({ children, tone = 'info', action, className = '' }: { children: ReactNode; tone?: 'info' | 'success' | 'warning' | 'error'; action?: ReactNode; className?: string }) {
   const Icon = tone === 'success' ? CheckCircle2 : tone === 'info' ? Info : AlertCircle;

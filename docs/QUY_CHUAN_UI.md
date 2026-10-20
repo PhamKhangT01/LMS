@@ -1,6 +1,6 @@
 # Quy chuẩn UI toàn hệ thống LMS
 
-Trạng thái: đề xuất workflow để duyệt trước khi triển khai diện rộng.
+Trạng thái: đã được duyệt và triển khai; nghiệm thu các luồng đại diện ngày 20/10/2026. Bằng chứng và giới hạn kiểm tra tại [UI_KIEM_THU.md](UI_KIEM_THU.md).
 
 ## Mục tiêu
 
@@ -8,7 +8,7 @@ Một ngôn ngữ giao diện xuyên suốt Admin, Trưởng khoa, Giảng viên
 
 Rà mã nguồn ngày 19/10/2026 cho thấy CSS từng module đang định nghĩa riêng nhiều cỡ chữ 9–13px, nút bo tròn/bo góc, bảng, thông báo và hộp thoại. Đây là kết quả rà mã nguồn; chưa phải kết luận kiểm tra toàn bộ màn hình trên trình duyệt.
 
-## Quy chuẩn đề xuất
+## Quy chuẩn áp dụng
 
 | Nhóm | Quy chuẩn |
 | --- | --- |
@@ -40,3 +40,13 @@ Rà mã nguồn ngày 19/10/2026 cho thấy CSS từng module đang định ngh�
 - Trang giới thiệu dùng chung nhận diện nhưng bố cục phục vụ giới thiệu; màn hình nghiệp vụ ưu tiên đọc, lọc và xử lý dữ liệu.
 - Hoàn thành khi toàn bộ nhóm màn hình trong danh mục đã áp dụng quy chuẩn, các luồng đại diện hoạt động và có bằng chứng kiểm tra bố cục thực tế.
 - Mỗi đợt ghi rõ file đã đổi, phần đã kiểm tra và vấn đề còn lại; không dùng kết quả build thay cho kiểm tra giao diện.
+
+## Nền tảng đã triển khai
+
+- `frontend/src/ui-tokens.css`: 36 biến màu, chữ, khoảng cách, bán kính và kích thước điều khiển.
+- `frontend/src/ui-system.css`: khung dashboard, điều hướng responsive, bảng, form, thông báo, trạng thái, focus và các biến thể hộp thoại.
+- `frontend/src/ui.tsx`: tiêu đề trang, phản hồi, trạng thái và dữ liệu rỗng dùng chung; `useFeedback` phân biệt lỗi/thành công/thông tin.
+- `frontend/src/WorkspaceNavigation.tsx`: menu dùng được bằng bàn phím, menu thu gọn trên mobile và mục điều hướng theo vai trò.
+- `frontend/src/AuthoringDialog.tsx`, `BusinessFormDialog.tsx`, `useUiConfirmation.tsx`: dialog native, quản lý focus/cuộn cho hộp thoại lồng nhau, mẫu form dài và xác nhận chưa lưu.
+- Các stylesheet module dùng lại token chung; đã dọn các quy tắc sidebar cũ. Các trang học phần, kho học liệu và không gian đọc bài hiển thị riêng theo mục điều hướng.
+- Kho học liệu có bộ chọn danh mục trên điện thoại; lịch nhiều sự kiện trong ngày xếp đúng cột; header mobile xử lý tên tài khoản dài. Các trang nghiệp vụ dùng Be Vietnam Pro, gồm cả tiêu đề và số liệu báo cáo học viên.
