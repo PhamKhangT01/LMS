@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "VITE_API_URL=/api npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://law-lms-14hk.onrender.com/api/:path*"
+    },
+    {
+      "source": "/((?!api(?:/|$)|assets(?:/|$)).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
