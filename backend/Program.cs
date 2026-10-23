@@ -31,6 +31,9 @@ builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IOperationsService, OperationsService>();
 builder.Services.AddScoped<IQuestionBankService, QuestionBankService>();
 builder.Services.AddScoped<IAcademicReportService, AcademicReportService>();
+builder.Services.Configure<OpenAiChatOptions>(builder.Configuration.GetSection(OpenAiChatOptions.SectionName));
+builder.Services.AddHttpClient<IChatCompletionProvider, OpenAiChatCompletionProvider>(client => client.Timeout = Timeout.InfiniteTimeSpan);
+builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddHostedService<LawLms.Api.AttemptExpiryWorker>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
@@ -42,6 +45,12 @@ builder.Services.AddRateLimiter(options => {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     options.AddPolicy("api", context => RateLimitPartition.GetFixedWindowLimiter(context.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? context.Connection.RemoteIpAddress?.ToString() ?? "anonymous", _ => new FixedWindowRateLimiterOptions { PermitLimit = 240, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
     options.AddPolicy("login", context => RateLimitPartition.GetFixedWindowLimiter(context.Connection.RemoteIpAddress?.ToString() ?? "anonymous", _ => new FixedWindowRateLimiterOptions { PermitLimit = 100, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
+    options.AddPolicy("chat", context => RateLimitPartition.GetFixedWindowLimiter(context.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? context.Connection.RemoteIpAddress?.ToString() ?? "anonymous", _ => new FixedWindowRateLimiterOptions { PermitLimit = Math.Clamp(builder.Configuration.GetValue("OpenAI:RequestsPerMinute", 10), 1, 120), Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
+    options.OnRejected = async (context, ct) =>
+    {
+        context.HttpContext.Response.Headers.RetryAfter = "60";
+        await Results.Problem(statusCode: StatusCodes.Status429TooManyRequests, title: "Đã đạt giới hạn lượt yêu cầu", detail: "Bạn đã gửi nhiều yêu cầu trong một phút. Vui lòng chờ một phút rồi thử lại.").ExecuteAsync(context.HttpContext);
+    };
 });
 
 var app = builder.Build();
@@ -82,7 +91,11 @@ app.UseAuthentication();
 app.UseRateLimiter();
 app.UseMiddleware<AccountAccessMiddleware>();
 app.UseAuthorization();
-app.MapControllers().RequireRateLimiting("api");
+app.MapControllers().Add(endpoint =>
+{
+    // Preserve action-specific policies (login/chat) instead of overriding them with the default API policy.
+    if (!endpoint.Metadata.OfType<EnableRateLimitingAttribute>().Any()) endpoint.Metadata.Add(new EnableRateLimitingAttribute("api"));
+});
 app.MapGet("/health/live", () => Results.Ok(new { status = "live" })).AllowAnonymous();
 app.MapGet("/health/ready", async (LmsDbContext db, CancellationToken ct) => await db.Database.CanConnectAsync(ct) ? Results.Ok(new { status = "ready" }) : Results.StatusCode(StatusCodes.Status503ServiceUnavailable)).AllowAnonymous();
 app.MapGet("/health", async (LmsDbContext db, CancellationToken ct) => await db.Database.CanConnectAsync(ct) ? Results.Ok(new { status = "healthy" }) : Results.StatusCode(StatusCodes.Status503ServiceUnavailable)).AllowAnonymous();

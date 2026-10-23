@@ -300,7 +300,7 @@ public class QuizAllowance
 }
 
 public enum QuestionDifficulty { Easy, Medium, Hard }
-public enum BankQuestionSource { ManualEssay, Docx, ExistingQuiz }
+public enum BankQuestionSource { ManualEssay, Docx, ExistingQuiz, Pdf }
 public class BankQuestion
 {
     public Guid Id { get; set; } = Guid.NewGuid();

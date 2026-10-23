@@ -1,0 +1,17 @@
+Mode: built-in image_gen editing the existing inner cover.
+Edit this existing A4 portrait Vietnamese inner cover. Keep ALL CONTENT exactly, including every word, name, code and Vietnamese diacritic. The user wants a DIFFERENT TYPOGRAPHY DESIGN, not content changes. Preserve both top logos, institutional header, light ice-blue technology background, navy/gold flowing ribbons, circuit details, lower book/globe illustration and footer. Restyle the CENTRAL TITLE typography into a clearly different sophisticated modern editorial composition: FLAT geometric/neo-grotesk display lettering, confident heavy dark-navy/royal-blue ink, precise spacing, crisp edges, no beveled chrome, no gold 3D extrusion, no slanted or curved letters, no thick shadows. Balanced stacked type with a new rhythm and generous negative space. 'BÀI DỰ THI' becomes a refined medium-size dark navy sans-serif label with wider tracking and simple thin gold horizontal rules instead of the heavy hexagonal title plaque. 'TÌM HIỂU VÀ SÁNG KIẾN VỀ' is a small clean supporting line. The hero 'CHUYỂN ĐỔI SỐ' should be re-composed as two strong oversized typographic lines: 'CHUYỂN ĐỔI' then 'SỐ', using contrasting weights/scale and one subtle cyan inline accent while remaining very readable. Make the second line expressive without dominating the whole page; avoid oversized 3D display style from the original. Beneath this hero use two crisp bold editorial lines: 'KHOA HỌC, CÔNG NGHỆ' / 'VÀ ĐỔI MỚI SÁNG TẠO', with dark navy and restrained royal blue contrast. Supporting institutional ending is small and centered. Keep all title text above the existing author panel so it does not overlap. Author panel stays in the same position and frame; use a refined readable medium-weight sans-serif for its three name rows, aligned and equally sized, and a simple flat navy/gold 'NHÓM TÁC GIẢ' label. Retain visual hierarchy and print contrast. No extra words, logos or illustrations.
+FULL EXACT CONTENT that must all remain:
+'BỘ CÔNG AN'
+'HỌC VIỆN AN NINH NHÂN DÂN'
+'BÀI DỰ THI'
+'TÌM HIỂU VÀ SÁNG KIẾN VỀ'
+'CHUYỂN ĐỔI SỐ'
+'KHOA HỌC, CÔNG NGHỆ'
+'VÀ ĐỔI MỚI SÁNG TẠO'
+'TẠI HỌC VIỆN AN NINH NHÂN DÂN'
+'NHÓM TÁC GIẢ'
+'Phạm Hưng Khang – B9D56'
+'Hồ Quốc Khánh – B9D56'
+'Nguyễn Mai Thành – B9D56'
+'HÀ NỘI – 2026'
+No semicolon, no words CUỘC THI, no separate LMS initiative text. No change to any name or code. Keep source emblems as supplied, do not reinvent their artwork. Same flat full-page A4 cover, no screenshot or mockup.

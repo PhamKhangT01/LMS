@@ -78,7 +78,34 @@ public sealed class QuestionBankService(LmsDbContext db) : IQuestionBankService
         var row=await Owned(id,command.Revision,actor,ct);row.IsArchived=command.Archived;row.Revision++;row.UpdatedAt=DateTime.UtcNow;
         Audit(actor,row,command.Archived?"bank.archive":"bank.restore");await db.SaveChangesAsync(ct);
     }
-    public async Task<BankImportResult> ImportAsync(Guid courseId,string topic,QuestionDifficulty difficulty,IReadOnlyList<CreateQuizQuestionCommand> questions,BankQuestionSource source,Actor actor,CancellationToken ct)
+    public Task<BankImportResult> ImportAsync(Guid courseId,string topic,QuestionDifficulty difficulty,IReadOnlyList<CreateQuizQuestionCommand> questions,BankQuestionSource source,Actor actor,CancellationToken ct)
+        => ImportCore(courseId,topic,difficulty,questions,source,actor,ct,null);
+    private static void CheckDocument(BankDocumentCommand command)
+    {
+        if(command.Questions is null || command.Questions.Count>200 || command.Questions.Any(x=>x is null || x.Options is null || x.Content is null || x.CorrectAnswer is null || x.Page<1 || x.Number<1) ||
+           string.IsNullOrWhiteSpace(command.FileName) || command.FileName.Length>255 || command.Format is not ("docx" or "pdf"))
+            throw new ConflictException("Thông tin tệp hoặc danh sách câu hỏi không hợp lệ.");
+    }
+    public async Task<IReadOnlyList<BankImportCheck>> CheckImportAsync(BankDocumentCommand command,Actor actor,CancellationToken ct)
+    {
+        Lecturer(actor); await Access(command.CourseId,actor,ct); CheckDocument(command);
+        var existing=await db.BankQuestions.AsNoTracking().Where(x=>x.CourseId==command.CourseId&&x.CreatedById==actor.Id).Select(x=>new{x.Id,x.Fingerprint}).ToListAsync(ct);
+        var byHash=existing.ToDictionary(x=>x.Fingerprint,x=>x.Id);var seen=new HashSet<string>();var result=new List<BankImportCheck>();
+        for(var i=0;i<command.Questions.Count;i++)
+        {
+            var x=command.Questions[i];var q=Normalize(new(x.Content,x.Type,x.Options,x.CorrectAnswer,x.Points));
+            var errors=new List<string>();try{BankQuestionRules.Validate(q,"",QuestionDifficulty.Medium);}catch(ConflictException ex){errors.Add(ex.Message);}
+            var hash=BankQuestionRules.Fingerprint(q);var duplicate=errors.Count==0&&!seen.Add(hash);
+            result.Add(new(i,byHash.TryGetValue(hash,out var id)?id:null,duplicate,errors));
+        }
+        return result;
+    }
+    public Task<BankImportResult> ImportDocumentAsync(BankDocumentCommand command,Actor actor,CancellationToken ct)
+    {
+        CheckDocument(command);
+        return ImportCore(command.CourseId,"",QuestionDifficulty.Medium,command.Questions.Select(x=>new CreateQuizQuestionCommand(x.Content,x.Type,x.Options,x.CorrectAnswer,x.Points)).ToArray(),command.Format=="pdf"?BankQuestionSource.Pdf:BankQuestionSource.Docx,actor,ct,command);
+    }
+    private async Task<BankImportResult> ImportCore(Guid courseId,string topic,QuestionDifficulty difficulty,IReadOnlyList<CreateQuizQuestionCommand> questions,BankQuestionSource source,Actor actor,CancellationToken ct,BankDocumentCommand? document)
     {
         Lecturer(actor);await Access(courseId,actor,ct);
         if(questions.Count is <1 or >200)throw new ConflictException("Mỗi lần nhập cần 1–200 câu hỏi.");
@@ -87,11 +114,13 @@ public sealed class QuestionBankService(LmsDbContext db) : IQuestionBankService
         await db.Database.ExecuteSqlInterpolatedAsync($"SELECT pg_advisory_xact_lock(hashtext({$"bank:{courseId}:{actor.Id}"}))",ct);
         var fingerprints=(await db.BankQuestions.Where(x=>x.CourseId==courseId&&x.CreatedById==actor.Id).Select(x=>x.Fingerprint).ToListAsync(ct)).ToHashSet();
         var count=0;
-        foreach(var q in normalized)
+        for(var i=0;i<normalized.Count;i++)
         {
+            var q=normalized[i];
             var row=Make(courseId,actor.Id,q,topic,difficulty,source);
             if(!fingerprints.Add(row.Fingerprint))continue;
             db.BankQuestions.Add(row);Audit(actor,row,"bank.import");count++;
+            if(document is not null)db.AuditEntries.Add(new(){ActorId=actor.Id,EntityId=courseId,Action="bank.document",Detail=JsonSerializer.Serialize(new{questionId=row.Id,fileName=Path.GetFileName(document.FileName.Replace('\\','/')),format=document.Format,page=document.Questions[i].Page,number=document.Questions[i].Number})});
         }
         await db.SaveChangesAsync(ct);await tx.CommitAsync(ct);return new(count,questions.Count-count);
     }

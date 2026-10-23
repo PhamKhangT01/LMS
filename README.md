@@ -91,4 +91,8 @@ Kiểm thử: `dotnet test tests/LawLms.WorkflowTests/LawLms.WorkflowTests.cspro
 
 API local mặc định cổng 5155. Có thể chạy bản đã build bằng `python3 scripts/run_local.py`; `--restart` khởi động lại tiến trình backend của chính dự án. Trưởng khoa cần cấu hình lịch và chính sách thật cho các lớp cũ trước khi mở; script migration giữ chúng ở bản nháp thay vì tự suy diễn lịch đào tạo.
 
+## Trợ lý LMS với OpenAI
+
+Chatbot hỗ trợ giải đáp bài học kèm nguồn và hướng dẫn sử dụng LMS theo vai trò. Backend kiểm tra quyền đọc học phần trước khi lấy nội dung gửi tới OpenAI; API key chỉ đặt ở máy chủ. Khi chưa có khóa, giao diện báo chatbot chưa sẵn sàng. Xem [Cấu hình và kiểm thử chatbot](docs/CHATBOT_LMS.md). Kiểm thử tích hợp trong schema PostgreSQL tạm: `python3 scripts/test_chatbot.py`.
+
 Email/SMS, SSO/SIS và hạ tầng production chưa được cấu hình. Bản local và kiểm thử tự động không thay cho nghiệm thu học vụ, kiểm thử tải và cam kết RPO/RTO của đơn vị.

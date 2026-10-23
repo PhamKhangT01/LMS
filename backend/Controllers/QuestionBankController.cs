@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LawLms.Api.Controllers;
 
 [ApiController,Authorize(Roles="Lecturer,DepartmentHead,Admin"),Route("api/question-bank")]
-public sealed class QuestionBankController(IQuestionBankService service) : ControllerBase
+public sealed partial class QuestionBankController(IQuestionBankService service) : ControllerBase
 {
     private Actor Actor=>new(Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!),Enum.Parse<UserRole>(User.FindFirstValue(ClaimTypes.Role)!));
     [HttpGet("courses")] public async Task<IActionResult> Courses(CancellationToken ct)=>Ok(await service.CoursesAsync(Actor,ct));

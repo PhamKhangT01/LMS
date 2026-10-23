@@ -11,6 +11,12 @@ public sealed class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<Ex
         catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested) { }
         catch (Exception exception)
         {
+            if (exception is BadHttpRequestException { StatusCode: StatusCodes.Status413PayloadTooLarge })
+            {
+                logger.LogInformation("Request body exceeded its size limit; TraceId: {TraceId}", context.TraceIdentifier);
+                await Results.Problem(statusCode: StatusCodes.Status413PayloadTooLarge, title: "Nội dung gửi lên quá lớn", detail: "Nội dung vượt giới hạn cho phép. Hãy rút gọn hoặc bắt đầu cuộc trò chuyện mới.").ExecuteAsync(context);
+                return;
+            }
             if (exception is NotFoundException or ConflictException or UnauthorizedAppException) logger.LogInformation("Request rejected: {Message}; TraceId: {TraceId}",exception.Message,context.TraceIdentifier);
             else logger.LogError(exception, "Unhandled request error: {TraceId}", context.TraceIdentifier);
             var (status, title) = exception switch { NotFoundException => (StatusCodes.Status404NotFound, "Không tìm thấy tài nguyên"), ConflictException => (StatusCodes.Status409Conflict, "Dữ liệu xung đột"), UnauthorizedAppException => (StatusCodes.Status403Forbidden, "Không có quyền truy cập"), DbUpdateConcurrencyException => (StatusCodes.Status409Conflict, "Dữ liệu đã thay đổi, vui lòng tải lại"), DbUpdateException => (StatusCodes.Status409Conflict, "Không thể thay đổi dữ liệu đang được sử dụng"), _ => (StatusCodes.Status500InternalServerError, "Lỗi máy chủ") };

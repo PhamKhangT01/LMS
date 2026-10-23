@@ -17,6 +17,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish ./
 COPY --from=frontend /web/dist ./wwwroot
+# Synthetic preview fixtures; restored from the image after a free-tier restart.
+COPY deployment/preview-uploads/ /data/uploads/
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://+:8080
 ENV Storage__RootPath=/data/uploads

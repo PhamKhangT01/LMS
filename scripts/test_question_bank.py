@@ -164,6 +164,8 @@ if __name__=='__main__':
                     except (OSError,urllib.error.URLError):time.sleep(.1)
                 else:raise RuntimeError('API did not start; see /private/tmp/lms-question-bank-api.log')
                 run(password,pg_env)
+                from test_document_import import run_document_checks
+                run_document_checks(password,pg_env)
             result={'passed':True,'checks':checks,'schema':schema,'publicDatabaseUntouched':True}
             (ROOT/'docs/NGAN_HANG_CAU_HOI_KIEM_THU.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
             print('All question-bank/shuffle integration checks passed.')

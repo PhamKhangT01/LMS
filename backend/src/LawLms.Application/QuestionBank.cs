@@ -13,10 +13,15 @@ public record BankEssay(Guid CourseId, string Content, string GradingGuide, deci
 public record BankEdit(string Content, IReadOnlyList<string> Options, string CorrectAnswer, decimal Points, string Topic, QuestionDifficulty Difficulty, int Revision);
 public record BankArchive(bool Archived, int Revision);
 public record BankImportResult(int Added, int Skipped);
+public record BankDocumentItem(string Content, QuestionType Type, IReadOnlyList<string> Options, string CorrectAnswer, decimal Points, int Page, int Number);
+public record BankDocumentCommand(Guid CourseId, string FileName, string Format, IReadOnlyList<BankDocumentItem> Questions);
+public record BankImportCheck(int Index, Guid? DuplicateId, bool DuplicateInFile, IReadOnlyList<string> Errors);
 public record BankFromQuiz(string Topic = "", QuestionDifficulty Difficulty = QuestionDifficulty.Medium);
 public record BankDraw(Guid CourseId, int Count, string? Topic = null, QuestionType? Type = null, QuestionDifficulty? Difficulty = null, IReadOnlyList<Guid>? ExcludeIds = null, string? Query = null);
 public interface IQuestionBankService
 {
+    Task<IReadOnlyList<BankImportCheck>> CheckImportAsync(BankDocumentCommand command, Actor actor, CancellationToken ct);
+    Task<BankImportResult> ImportDocumentAsync(BankDocumentCommand command, Actor actor, CancellationToken ct);
     Task<IReadOnlyList<BankCourse>> CoursesAsync(Actor actor, CancellationToken ct);
     Task<BankPage> SearchAsync(BankFilter filter, Actor actor, CancellationToken ct);
     Task<Guid> CreateEssayAsync(BankEssay command, Actor actor, CancellationToken ct);
